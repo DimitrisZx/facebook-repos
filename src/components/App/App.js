@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
 import Loader from "../Loader/Loader";
-
+import List from "../List/List";
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       fetchingData: true,
-      reposData: []
+      reposData: [],
+      itemsPerPage: 8 // or 16
     }
     this.fetchRepositoryData = this.fetchRepositoryData.bind(this);
   }
@@ -27,13 +28,11 @@ class App extends React.Component {
   }
   
   render () {
-    const { fetchingData } = this.state;
+    const { fetchingData, reposData, itemsPerPage } = this.state;
     return (
       <div className="App">
         { fetchingData ? <Loader /> : null }
-        <ul>
-          { this.state.reposData.map(repo => <li>{repo.full_name}</li>) }
-        </ul>
+        <List reposData={ reposData } itemsPerPage={ itemsPerPage } />
       </div>
     );
   }

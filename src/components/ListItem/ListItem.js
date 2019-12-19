@@ -1,5 +1,7 @@
 import React from 'react';
 import { createUseStyles } from "react-jss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {} from "@fortawesome/react-fontawesome/free-solid-svg-icons"
 
 export default function ListItem({ title, starsCount }) {
     const classes = useStyles();

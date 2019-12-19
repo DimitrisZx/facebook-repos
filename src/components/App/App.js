@@ -15,6 +15,7 @@ class App extends React.Component {
       searchTerm: ""
     }
     this.fetchRepositoryData = this.fetchRepositoryData.bind(this);
+    this.setNumOfResults = this.setNumOfResults.bind(this);
   }
 
   async fetchRepositoryData () {
@@ -24,10 +25,22 @@ class App extends React.Component {
     console.log(parsedData)
     this.setState({ 
       reposData: parsedData,
-      fetchingData: false
+      fetchingData: false,
+      currentPage: 0
     });
   }
   
+  setNumOfResults() {
+    const { itemsPerPage } = this.state;
+    let newItemsPerPage;
+    if (itemsPerPage === 8) {
+      newItemsPerPage = 16;
+    } else {
+      newItemsPerPage = 8;
+    }
+    this.setState({itemsPerPage: newItemsPerPage})
+  }
+
   componentDidMount() {
     this.fetchRepositoryData();
   }
@@ -41,8 +54,8 @@ class App extends React.Component {
           <section style={topNavStyles}>
             <SearchBar />
             <section style={displayOptionsStyles}>
-              <button>Filter</button>
-              <button>Display</button>
+              <button>Sort By</button>
+              <button onClick={this.setNumOfResults}>8/16</button>
             </section>
           </section>
           <List reposData={ reposData } itemsPerPage={ itemsPerPage } />

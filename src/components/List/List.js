@@ -13,8 +13,9 @@ export default function List({ reposData, itemsPerPage }) {
 
 const useStyles = createUseStyles({
     listStyle: {
-        border: "1px solid blue",
+        border: "1px solid #3b5998",
         background: "white",
-        padding: 0,
+        padding: "10px",
+        borderRadius: "3px"
     },
 });

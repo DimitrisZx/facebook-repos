@@ -23,9 +23,15 @@ const useStyles = createUseStyles({
         padding: 0
     },
     listItem: {
-        width: "100%",
         display: "flex",
-        justifyContent: "space-between"
+        color: "#3b5998",
+        justifyContent: "space-between",
+        background: "#e8ebf3",
+        border: "1px solid #ced5e5",
+        marginBottom: '5px',
+        padding: "15px 20px",
+        borderRadius: "3px",
+        cursor: "pointer"
     }
 })
 

@@ -24,6 +24,7 @@ class App extends React.Component {
   }
 
   async fetchRepositoryData () {
+    
     const URL = "https://api.github.com/users/facebook/repos?per_page=100";
     const responseJSON = await fetch(URL);
     const parsedData = await responseJSON.json();

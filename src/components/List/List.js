@@ -22,9 +22,14 @@ export default function List({ reposData, itemsPerPage, toggleItem, expandedItem
 
 const useStyles = createUseStyles({
     listStyle: {
+        overflowY: "auto",
         border: "1px solid #3b5998",
         background: "white",
         padding: "15px",
-        borderRadius: "3px"
+        borderRadius: "3px",
+        height: "75%",
+        "& :hover": {
+            background: "#3b59aa"
+        }
     },
 });

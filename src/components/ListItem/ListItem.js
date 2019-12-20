@@ -19,7 +19,7 @@ export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
                     </span>
                     {stargazers_count}
                 </div>
-            <FontAwesomeIcon  className={classes.caretIcon}icon={faCaretDown } />
+            <FontAwesomeIcon className={ classes.caretIcon } icon={ faCaretDown } />
             </header> 
             
             {
@@ -44,6 +44,7 @@ const useStyles = createUseStyles({
         padding: "15px 20px",
     },
     caretIcon: {
+        ":last-child": {},
         flex:1,
     },
     starIcon: {
@@ -72,9 +73,13 @@ const useStyles = createUseStyles({
         background: "none",
         border: "1px solid #ced5e5",
         marginBottom: '5px',
-
         borderRadius: "3px",
-        cursor: "pointer"
+        cursor: "pointer",
+        "& li:last-child": {
+            marginBottom: 10,
+            backgroundColor: "red",
+            flexDirection: "row",
+        }
     }
 })
 

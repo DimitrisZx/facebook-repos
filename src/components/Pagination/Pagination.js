@@ -8,7 +8,7 @@ export default function Pagination({ numOfPages }) {
         const firstPagesToShow = pages.slice(0, 3);
         return (
             <>
-                {firstPagesToShow.map(numOfPage => <li className={classes.pageBtnStyles}>{numOfPage+1}</li>)}
+                {firstPagesToShow.map(numOfPage => <li key={numOfPage} className={classes.pageBtnStyles}>{numOfPage+1}</li>)}
                 <div className={classes.dividerStyles}>...</div>
                 <li className={classes.pageBtnStyles}>{pages[pages.length-1]}</li>
             </>

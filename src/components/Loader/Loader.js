@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 export default function Loader() {
     const classes = useStyles();
     return (
-        <section className={ classes.containerStyles } className="loader">
+        <section className={ classes.containerStyles }>
             <div className={ classes.loaderStyles } >LOADER GOES HERE</div>
         </section>
     )

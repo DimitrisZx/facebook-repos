@@ -4,6 +4,8 @@ import Loader from "../Loader/Loader";
 import List from "../List/List";
 import SearchBar from "../SearchBar/SearchBar";
 import Pagination from "../Pagination/Pagination";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 class App extends React.Component {
   constructor() {
@@ -12,19 +14,29 @@ class App extends React.Component {
       fetchingData: true,
       reposData: [],
       itemsPerPage: 8, // or 16
-      searchTerm: ""
+      searchTerm: "",
+      expandedItem: undefined
     }
     this.fetchRepositoryData = this.fetchRepositoryData.bind(this);
     this.setNumOfResults = this.setNumOfResults.bind(this);
+    this.toggleItem = this.toggleItem.bind(this);
+    this.sortResults = this.sortResults.bind(this);
   }
 
   async fetchRepositoryData () {
     const URL = "https://api.github.com/users/facebook/repos?per_page=100";
     const responseJSON = await fetch(URL);
     const parsedData = await responseJSON.json();
-    console.log(parsedData)
+    const requiredData = parsedData.map(
+      repo => ({
+          id: repo.id, 
+          full_name: repo.full_name, 
+          stargazers_count: repo.stargazers_count, 
+          description: repo.description
+      }))
+    console.log(requiredData)
     this.setState({ 
-      reposData: parsedData,
+      reposData: requiredData,
       fetchingData: false,
       currentPage: 0
     });
@@ -41,29 +53,57 @@ class App extends React.Component {
     this.setState({itemsPerPage: newItemsPerPage})
   }
 
+  toggleItem(itemToExpand){
+    console.log(itemToExpand)
+
+    if (itemToExpand === this.state.expandedItem) {
+      this.setState({ expandedItem: undefined })
+    } else {
+      this.setState({ expandedItem: itemToExpand })
+    }
+  }
+
+  sortResults(fieldToSortBy="") {
+    const { results } = this.state;
+    const sortedResults = results.sort((a,b) => a.stargazers_count - b.stargazers_count);
+    this.setState({ reposData: sortedResults }) 
+  }
+
   componentDidMount() {
     this.fetchRepositoryData();
   }
   
   render() {
-    const { fetchingData, reposData, itemsPerPage } = this.state;
+    const { fetchingData, reposData, itemsPerPage, expandedItem } = this.state;
     return (
       <div className="App" style={appStyles}>
         { fetchingData ? <Loader /> : null }
         <section style={contentsStyles} id="contents">
           <section style={topNavStyles}>
-            <SearchBar />
+            <h1 style={titleStyles}>Repository Results</h1>
             <section style={displayOptionsStyles}>
-              <button>Sort By</button>
+              <button onClick={this.sortResults}>Sort By <FontAwesomeIcon icon={faCaretDown}/></button>
               <button onClick={this.setNumOfResults}>8/16</button>
             </section>
           </section>
-          <List reposData={ reposData } itemsPerPage={ itemsPerPage } />
+          <List 
+            expandedItem={ expandedItem }
+            reposData={ reposData } 
+            itemsPerPage={ itemsPerPage } 
+            toggleItem={ this.toggleItem } 
+          />
           <Pagination />
         </section>
       </div>
     );
   }
+}
+
+const titleStyles = {
+  padding: '0',
+  margin: "5px",
+  fontSize: "1.6rem",
+  color: "#3b5998"
 }
 
 
@@ -78,7 +118,7 @@ const topNavStyles = {
 }
 
 const contentsStyles = {
-  width: "55%",
+  width: "40%",
 }
 
 const appStyles = {

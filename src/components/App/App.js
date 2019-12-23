@@ -4,9 +4,11 @@ import Loader from "../Loader/Loader";
 import List from "../List/List";
 import SearchBar from "../SearchBar/SearchBar";
 import Pagination from "../Pagination/Pagination";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import SortByButton from "../SortByButton/SortByButton";
+import ResultsPerPageBtn from "../ResultsPerPageBtn/ResultsPerPageBtn";
+import { response } from "../../savedResponse";
 
+console.log(response)
 class App extends React.Component {
   constructor() {
     super();
@@ -15,27 +17,37 @@ class App extends React.Component {
       reposData: [],
       itemsPerPage: 8, // or 16
       searchTerm: "",
-      expandedItem: undefined
+      expandedItem: undefined,
+      searchedResults: [],
+      currentPageIndex: 0
     }
     this.fetchRepositoryData = this.fetchRepositoryData.bind(this);
     this.setNumOfResults = this.setNumOfResults.bind(this);
     this.toggleItem = this.toggleItem.bind(this);
     this.sortResults = this.sortResults.bind(this);
+    this.searchResults = this.searchResults.bind(this);
   }
 
   async fetchRepositoryData () {
     
-    const URL = "https://api.github.com/users/facebook/repos?per_page=100";
-    const responseJSON = await fetch(URL);
-    const parsedData = await responseJSON.json();
-    const requiredData = parsedData.map(
-      repo => ({
-          id: repo.id, 
-          full_name: repo.full_name, 
-          stargazers_count: repo.stargazers_count, 
-          description: repo.description
-      }))
-    console.log(requiredData)
+    // const URL = "https://api.github.com/users/facebook/repos?per_page=100";
+    // const responseJSON = await fetch(URL);
+    // const parsedData = await responseJSON.json();
+    // const requiredData = parsedData.map(
+    //   repo => ({
+    //       id: repo.id, 
+    //       full_name: repo.full_name, 
+    //       stargazers_count: repo.stargazers_count, 
+    //       description: repo.description
+    //   }))
+    // console.log(requiredData)
+    const requiredData = response.map(
+        repo => ({
+            id: repo.id, 
+            full_name: repo.full_name, 
+            stargazers_count: repo.stargazers_count, 
+            description: repo.description
+        }));
     this.setState({ 
       reposData: requiredData,
       fetchingData: false,
@@ -43,15 +55,8 @@ class App extends React.Component {
     });
   }
   
-  setNumOfResults() {
-    const { itemsPerPage } = this.state;
-    let newItemsPerPage;
-    if (itemsPerPage === 8) {
-      newItemsPerPage = 16;
-    } else {
-      newItemsPerPage = 8;
-    }
-    this.setState({itemsPerPage: newItemsPerPage})
+  setNumOfResults(numOfResults) {
+    this.setState({itemsPerPage: numOfResults});
   }
 
   toggleItem(itemToExpand){
@@ -64,10 +69,33 @@ class App extends React.Component {
     }
   }
 
-  sortResults(fieldToSortBy="") {
-    const { results } = this.state;
-    const sortedResults = results.sort((a,b) => a.stargazers_count - b.stargazers_count);
-    this.setState({ reposData: sortedResults }) 
+  sortResults(fieldToSortBy) {
+    const { reposData: results } = this.state;
+    console.log(results.forEach(result => console.log(result[fieldToSortBy])))
+    if (fieldToSortBy === "full_name") {
+      const sortedResults = results.sort((a,b) => a[fieldToSortBy].toLowerCase() < b[fieldToSortBy].toLowerCase() ? -1 : 1 );
+      const sortedSearchResults = results.sort((a,b) => a[fieldToSortBy].toLowerCase() < b[fieldToSortBy].toLowerCase() ? -1 : 1 );
+      this.setState({ 
+        reposData: sortedResults, 
+        searchedResults: sortedSearchResults
+      }) 
+    } else {
+      const sortedResults = results.sort((a,b) => b[fieldToSortBy] - a[fieldToSortBy]);
+      const sortedSearchResults = results.sort((a,b) => b[fieldToSortBy] - a[fieldToSortBy]);
+      this.setState({ 
+        reposData: sortedResults,
+        searchedResults: sortedSearchResults
+      }) 
+    }
+  }
+
+  searchResults(searchTerm) {
+    if (searchTerm === "") {
+      this.setState({searchedResults: []})
+    } else {
+      const foundItems = this.state.reposData.filter(repo => repo.full_name.includes(searchTerm));
+      this.setState({searchedResults: foundItems})
+    }
   }
 
   componentDidMount() {
@@ -75,25 +103,26 @@ class App extends React.Component {
   }
   
   render() {
-    const { fetchingData, reposData, itemsPerPage, expandedItem } = this.state;
+    const { fetchingData, reposData, itemsPerPage, expandedItem, searchedResults } = this.state;
     return (
       <div className="App" style={appStyles}>
         { fetchingData ? <Loader /> : null }
         <section style={contentsStyles} id="contents">
+          <SearchBar searchFunction={this.searchResults}/>
           <section style={topNavStyles}>
             <h1 style={titleStyles}>Repository Results</h1>
             <section style={displayOptionsStyles}>
-              <button onClick={this.sortResults}>Sort By <FontAwesomeIcon icon={faCaretDown}/></button>
-              <button onClick={this.setNumOfResults}>8/16</button>
+              <SortByButton sortingFunction={this.sortResults} />
+              <ResultsPerPageBtn resultsNumFunction={this.setNumOfResults} />
             </section>
           </section>
           <List 
             expandedItem={ expandedItem }
-            reposData={ reposData } 
+            reposData={  searchedResults.length === 0 ? reposData : searchedResults } 
             itemsPerPage={ itemsPerPage } 
             toggleItem={ this.toggleItem } 
           />
-          <Pagination />
+          <Pagination  />
         </section>
       </div>
     );

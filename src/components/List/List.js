@@ -28,8 +28,5 @@ const useStyles = createUseStyles({
         padding: "15px",
         borderRadius: "3px",
         height: "75%",
-        "& :hover": {
-            background: "#3b59aa"
-        }
     },
 });

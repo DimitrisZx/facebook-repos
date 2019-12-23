@@ -1,10 +1,19 @@
 import React from 'react'
 
-export default function SearchBar() {
+export default function SearchBar({ searchFunction }) {
+    
+    const handleChange = e => {
+        const searchTerm = e.target.value;
+        console.log(searchTerm);
+        searchFunction(searchTerm);
+    }
+    
     return (
+
+
         <form>
             <label style={labelStyles} htmlFor="search">Search: </label>
-            <input id="search" name="search" type="text"/>
+            <input onChange={handleChange} id="search" name="search" type="text"/>
         </form>
     )
 }

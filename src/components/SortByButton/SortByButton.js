@@ -20,7 +20,7 @@ export default function SortByButton({ sortingFunction }) {
         sortingFunction(fieldToSort)
     }
     return (
-        <div >
+        <div className={classes.displayBtn}>
             <button onClick={ expandOptions }>Sort By <FontAwesomeIcon icon={faCaretDown}/></button>
             <section id="sorting-options" className={classes.sortingOptions}>
                 <ul>
@@ -33,8 +33,14 @@ export default function SortByButton({ sortingFunction }) {
 }
 
 const useStyles = createUseStyles({
+    displayBtn: {
+        position: "relative"
+    },
     sortingOptions: {
+        background: "#fff",
         border: "1px solid black",
+        position: "absolute",
+        top: "22px",
         "&  *": {
             listStyle: "none",
             padding: "0",

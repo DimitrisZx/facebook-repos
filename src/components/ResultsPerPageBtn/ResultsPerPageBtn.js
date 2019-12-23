@@ -21,7 +21,7 @@ export default function SortByButton({ resultsNumFunction }) {
     }
 
     return (
-        <div >
+        <div className={classes.displayBtn}>
             <button onClick={ expandOptions }>8<FontAwesomeIcon icon={faCaretDown}/></button>
             <section id="display-options" className={classes.resultsOptions}>
                 <ul>
@@ -34,12 +34,19 @@ export default function SortByButton({ resultsNumFunction }) {
 }
 
 const useStyles = createUseStyles({
+    displayBtn: {
+        position: "relative"
+    },
     resultsOptions: {
+        background: "#fff",
         border: "1px solid black",
+        position: "absolute",
+        top: "22px",
+        width: "100%",
         "&  *": {
             listStyle: "none",
             padding: "0",
-            margin: "5",
+            margin: "0",
             cursor: "pointer"
         },
         display: "none"

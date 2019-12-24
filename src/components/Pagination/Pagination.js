@@ -3,14 +3,17 @@ import { createUseStyles } from "react-jss";
 
 export default function Pagination({ numOfPages }) {
     const classes = useStyles();
+    console.log(numOfPages)
     const generatePages = numOfPages => {
         const pages = [0,1,2,3,4,5,6];
         const firstPagesToShow = pages.slice(0, 3);
         return (
             <>
+                <button>{"<"}</button> 
                 {firstPagesToShow.map(numOfPage => <li key={numOfPage} className={classes.pageBtnStyles}>{numOfPage+1}</li>)}
                 <div className={classes.dividerStyles}>...</div>
-                <li className={classes.pageBtnStyles}>{pages[pages.length-1]}</li>
+                <li className={classes.pageBtnStyles}>{numOfPages}</li>
+                <button>{">"}</button>
             </>
         )
     }
@@ -18,7 +21,7 @@ export default function Pagination({ numOfPages }) {
     return (
         <nav>
             <ul className={classes.paginationStyles}>
-                { generatePages(10) }
+                { generatePages(numOfPages) }
             </ul> 
         </nav>
     )

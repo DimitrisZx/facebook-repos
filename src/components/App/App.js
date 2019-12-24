@@ -103,7 +103,7 @@ class App extends React.Component {
   }
   
   render() {
-    const { fetchingData, reposData, itemsPerPage, expandedItem, searchedResults } = this.state;
+    const { fetchingData, reposData, itemsPerPage, expandedItem, searchedResults, currentPageIndex } = this.state;
     return (
       <div className="App" style={appStyles}>
         { fetchingData ? <Loader /> : null }
@@ -122,7 +122,7 @@ class App extends React.Component {
             itemsPerPage={ itemsPerPage } 
             toggleItem={ this.toggleItem } 
           />
-          <Pagination  />
+          <Pagination currentPage={currentPageIndex} numOfPages={parseInt(reposData.length / itemsPerPage)}  />
         </section>
       </div>
     );

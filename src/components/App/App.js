@@ -19,13 +19,14 @@ class App extends React.Component {
       searchTerm: "",
       expandedItem: undefined,
       searchedResults: [],
-      currentPageIndex: 0
+      currentPageIndex: 1
     }
     this.fetchRepositoryData = this.fetchRepositoryData.bind(this);
     this.setNumOfResults = this.setNumOfResults.bind(this);
     this.toggleItem = this.toggleItem.bind(this);
     this.sortResults = this.sortResults.bind(this);
     this.searchResults = this.searchResults.bind(this);
+    this.goToPage = this.goToPage.bind(this);
   }
 
   async fetchRepositoryData () {
@@ -101,6 +102,10 @@ class App extends React.Component {
   componentDidMount() {
     this.fetchRepositoryData();
   }
+
+  goToPage(pageIndex) {
+    this.setState({ currentPage: pageIndex })
+  }
   
   render() {
     const { fetchingData, reposData, itemsPerPage, expandedItem, searchedResults, currentPageIndex } = this.state;
@@ -122,7 +127,11 @@ class App extends React.Component {
             itemsPerPage={ itemsPerPage } 
             toggleItem={ this.toggleItem } 
           />
-          <Pagination currentPage={currentPageIndex} numOfPages={parseInt(reposData.length / itemsPerPage)}  />
+          <Pagination 
+            currentPage={currentPageIndex} 
+            numOfPages={parseInt(reposData.length / itemsPerPage)}  
+            goToPage={this.goToPage}
+          />
         </section>
       </div>
     );

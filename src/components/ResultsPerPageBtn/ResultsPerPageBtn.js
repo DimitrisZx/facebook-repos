@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { createUseStyles } from "react-jss";
 
-export default function SortByButton({ resultsNumFunction }) {
+export default function ResultsPerPageBtn({ resultsNumFunction }) {
     const classes = useStyles();
     const resultsOptions = document.querySelector("#display-options");
 
@@ -22,6 +22,7 @@ export default function SortByButton({ resultsNumFunction }) {
 
     return (
         <div className={classes.displayBtn}>
+            <span>Results Per page</span>
             <button onClick={ expandOptions }>8<FontAwesomeIcon icon={faCaretDown}/></button>
             <section id="display-options" className={classes.resultsOptions}>
                 <ul>

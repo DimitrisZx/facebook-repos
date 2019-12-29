@@ -35,6 +35,8 @@ export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
 }
 
 const useStyles = createUseStyles({
+
+    
     listItemDesc: {
         padding: "5px"
     },

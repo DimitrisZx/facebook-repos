@@ -19,7 +19,7 @@ class App extends React.Component {
       searchTerm: "",
       expandedItem: undefined,
       searchedResults: [],
-      currentPageIndex: 1
+      currentPageIndex: 0 // 0 ... n
     }
     this.fetchRepositoryData = this.fetchRepositoryData.bind(this);
     this.setNumOfResults = this.setNumOfResults.bind(this);
@@ -37,7 +37,7 @@ class App extends React.Component {
     // const requiredData = parsedData.map(
     //   repo => ({
     //       id: repo.id, 
-    //       full_name: repo.full_name, 
+    //       full_name: repo.full_name.split("/")[1], 
     //       stargazers_count: repo.stargazers_count, 
     //       description: repo.description
     //   }))
@@ -45,14 +45,13 @@ class App extends React.Component {
     const requiredData = response.map(
         repo => ({
             id: repo.id, 
-            full_name: repo.full_name, 
+            full_name: repo.full_name.split("/")[1], 
             stargazers_count: repo.stargazers_count, 
             description: repo.description
         }));
     this.setState({ 
       reposData: requiredData,
       fetchingData: false,
-      currentPage: 0
     });
   }
   
@@ -104,7 +103,7 @@ class App extends React.Component {
   }
 
   goToPage(pageIndex) {
-    this.setState({ currentPage: pageIndex })
+    this.setState({ currentPageIndex: pageIndex })
   }
   
   render() {
@@ -126,6 +125,7 @@ class App extends React.Component {
             reposData={  searchedResults.length === 0 ? reposData : searchedResults } 
             itemsPerPage={ itemsPerPage } 
             toggleItem={ this.toggleItem } 
+            pageIndex={ currentPageIndex }
           />
           <Pagination 
             currentPage={currentPageIndex} 
@@ -149,6 +149,7 @@ const titleStyles = {
 const displayOptionsStyles = {
   display: "flex",
   justifyContent: "space-evenly",
+  alignItems: "center",
 }
 
 const topNavStyles = {

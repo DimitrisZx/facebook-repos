@@ -34,7 +34,7 @@ const useStyles = createUseStyles({
         padding: "15px",
         borderRadius: "3px",
         margin: "15px 0px",
-        height: "550px",
+        height: "510px",
         overflow: "auto"
     },
 });

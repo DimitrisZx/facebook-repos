@@ -36,7 +36,7 @@ export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
 
 const useStyles = createUseStyles({
 
-    
+
     listItemDesc: {
         padding: "5px"
     },
@@ -77,11 +77,12 @@ const useStyles = createUseStyles({
         marginBottom: '5px',
         borderRadius: "3px",
         cursor: "pointer",
-        "& li:last-child": {
+        "& .listItem:last-child": {
             marginBottom: 10,
             backgroundColor: "red",
             flexDirection: "row",
         }
-    }
+        
+    },
 })
 

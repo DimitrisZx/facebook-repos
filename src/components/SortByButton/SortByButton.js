@@ -9,9 +9,13 @@ export default function SortByButton({ sortingFunction }) {
 
     const expandOptions = e => {
         if (sortingOptions.hasAttribute("style")) {
-            sortingOptions.removeAttribute("style");
+            document.querySelector("#sorting-options").style.display = "flex"
         } else {
             sortingOptions.style.display = "flex"
+            const optionsList = document.querySelector("#sorting-btn");
+            optionsList.addEventListener("mouseleave", () => {
+                document.querySelector("#sorting-options").style.display = "none"
+            })
         }
     };
 
@@ -20,8 +24,8 @@ export default function SortByButton({ sortingFunction }) {
         sortingFunction(fieldToSort)
     }
     return (
-        <div className={classes.displayBtn}>
-            <button onClick={ expandOptions }>Sort By <FontAwesomeIcon icon={faCaretDown}/></button>
+        <div id="sorting-btn" className={classes.displayBtn}>
+            <button className={classes.button} onClick={ expandOptions }><span>Sort By</span> <FontAwesomeIcon icon={faCaretDown}/></button>
             <section id="sorting-options" className={classes.sortingOptions}>
                 <ul>
                     <li onClick={() => handleClick(sortingFunction, "full_name")} className={classes.sortingOption}>Name</li>
@@ -33,14 +37,25 @@ export default function SortByButton({ sortingFunction }) {
 }
 
 const useStyles = createUseStyles({
+    button : {
+        background: "#fff",
+        padding: "7px",
+        width: "100px",
+        display: "flex",
+        justifyContent: "space-between",
+        borderRadius: "3px",
+        border: "1px solid #6a81b1",
+        fontSize: ".8rem",
+        borderRadius: "3px"
+    },
     displayBtn: {
-        position: "relative"
+        position: "relative",
+        marginRight: "50px",
+        zIndex: "3",
     },
     sortingOptions: {
-        background: "#fff",
-        border: "1px solid black",
         position: "absolute",
-        top: "22px",
+        top: "30px",
         "&  *": {
             listStyle: "none",
             padding: "0",
@@ -49,4 +64,12 @@ const useStyles = createUseStyles({
         },
         display: "none"
     },
+    sortingOption : {
+        background: "#fff",
+        marginTop: "2px",
+        border: "1px solid #3b5998",
+        padding: "10px",
+        textAlign: "left",
+        color: "#3b5998"
+    }
 });

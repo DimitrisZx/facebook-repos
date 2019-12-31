@@ -3,15 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { createUseStyles } from "react-jss";
 
-export default function ResultsPerPageBtn({ resultsNumFunction }) {
+export default function ResultsPerPageBtn({ resultsNumFunction, itemsPerPageNum }) {
     const classes = useStyles();
     const resultsOptions = document.querySelector("#display-options");
 
     const expandOptions = () => {
         if (resultsOptions.hasAttribute("style")) {
-            resultsOptions.removeAttribute("style");
+            document.querySelector("#display-options").style.display = "flex";
         } else {
             resultsOptions.style.display = "flex";
+            const optionsList = document.querySelector("#results-btn");
+            optionsList.addEventListener("mouseleave", () => {
+                document.querySelector("#display-options").style.display = "none";
+            })
         }
     };
 
@@ -21,13 +25,13 @@ export default function ResultsPerPageBtn({ resultsNumFunction }) {
     }
 
     return (
-        <div className={classes.displayBtn}>
-            <span>Results Per page</span>
-            <button onClick={ expandOptions }>8<FontAwesomeIcon icon={faCaretDown}/></button>
+        <div id="results-btn" className={classes.displayBtn}>
+            <span style={{color: "#3b5998"}}>results per page</span>
+            <button className={classes.button} onClick={ expandOptions }><span>{itemsPerPageNum}</span><FontAwesomeIcon icon={faCaretDown}/></button>
             <section id="display-options" className={classes.resultsOptions}>
                 <ul>
-                    <li onClick={() => handleClick(resultsNumFunction, "8")} className={classes.sortingOption}>8</li>
-                    <li onClick={() => handleClick(resultsNumFunction, "16")} className={classes.sortingOption}>16</li>
+                    <li onClick={() => handleClick(resultsNumFunction, "8")} className={classes.resultsOption}>8</li>
+                    <li onClick={() => handleClick(resultsNumFunction, "16")} className={classes.resultsOption}>16</li>
                 </ul>  
             </section> 
         </div>
@@ -35,14 +39,25 @@ export default function ResultsPerPageBtn({ resultsNumFunction }) {
 }
 
 const useStyles = createUseStyles({
+    button: {
+        background: "#fff",
+        border: "1px solid #6a81b1",
+        fontSize: ".8rem",
+        borderRadius: "3px",
+        marginLeft: "10px",
+        padding: "7px",
+        display: "flex",
+        justifyContent: "space-between",
+        width: "40px"
+    },
     displayBtn: {
-        position: "relative"
+        position: "relative",
+        display: "flex",
+        zIndex: 3
     },
     resultsOptions: {
-        background: "#fff",
-        border: "1px solid black",
         position: "absolute",
-        top: "22px",
+        top: "30px",
         width: "100%",
         "&  *": {
             listStyle: "none",
@@ -50,6 +65,16 @@ const useStyles = createUseStyles({
             margin: "0",
             cursor: "pointer"
         },
-        display: "none"
+        display: "none",
+        justifyContent: "flex-end"
     },
+    resultsOption : {
+        background: "#fff",
+        marginTop: "2px",
+        border: "1px solid #3b5998",
+        padding: "10px",
+        textAlign: "left",
+        color: "#3b5998",
+        width: "100%",
+    }
 });

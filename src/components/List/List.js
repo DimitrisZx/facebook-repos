@@ -9,6 +9,10 @@ export default function List({ reposData, itemsPerPage, toggleItem, expandedItem
     const firstRepoIndex = itemsPerPage * pageIndex;
     const lastRepoIndex = firstRepoIndex + itemsPerPage;
     const reposToShow = reposData.slice(firstRepoIndex, lastRepoIndex)
+    console.log(firstRepoIndex,lastRepoIndex    )
+    if (reposData === '') {
+        reposData = "No matching repos";
+    }
     return (
         <ul className={classes.listStyle}>
             { reposToShow.map((repo, index) => 
@@ -29,6 +33,8 @@ const useStyles = createUseStyles({
         background: "white",
         padding: "15px",
         borderRadius: "3px",
-        marginTop: "5px"
+        margin: "15px 0px",
+        height: "550px",
+        overflow: "auto"
     },
 });

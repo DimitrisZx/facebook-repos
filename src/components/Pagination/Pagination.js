@@ -8,7 +8,7 @@ export default function Pagination({ currentPage, numOfPages, goToPage }) {
     console.log(numOfPages)
 
     const handleClick = (pageIndex, numOfPages=undefined) => {
-        if ((numOfPages !== undefined && pageIndex > numOfPages) || pageIndex < 1) {
+        if ((numOfPages !== undefined && pageIndex > numOfPages) || pageIndex < 0) {
             return; // Cancel operation if index is bigger than last page or smaller than 1
         } else { 
             goToPage(pageIndex);

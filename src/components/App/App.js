@@ -56,7 +56,7 @@ class App extends React.Component {
   }
   
   setNumOfResults(numOfResults) {
-    this.setState({itemsPerPage: numOfResults});
+    this.setState({itemsPerPage: parseInt(numOfResults)});
   }
 
   toggleItem(itemToExpand){
@@ -94,7 +94,10 @@ class App extends React.Component {
       this.setState({searchedResults: []})
     } else {
       const foundItems = this.state.reposData.filter(repo => repo.full_name.includes(searchTerm));
-      this.setState({searchedResults: foundItems})
+      this.setState({
+        searchedResults: foundItems,
+        currentPageIndex: 0
+      })
     }
   }
 
@@ -117,7 +120,7 @@ class App extends React.Component {
             <h1 style={titleStyles}>Repository Results</h1>
             <section style={displayOptionsStyles}>
               <SortByButton sortingFunction={this.sortResults} />
-              <ResultsPerPageBtn resultsNumFunction={this.setNumOfResults} />
+              <ResultsPerPageBtn resultsNumFunction={this.setNumOfResults} itemsPerPageNum={itemsPerPage} />
             </section>
           </section>
           <List 

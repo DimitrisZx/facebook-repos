@@ -2,7 +2,6 @@ import React from 'react';
 import { createUseStyles } from "react-jss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faCaretDown } from "@fortawesome/free-solid-svg-icons"
-import ListItemDesc from "./ListItemDesc"
 
 export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
     const classes = useStyles();
@@ -22,7 +21,7 @@ export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
                 isExpanded 
                     ?   <section className={classes.listItemDesc}>
                             <h4>Description:</h4>
-                            <ListItemDesc descriptionText={description} />
+                            <div>{description}</div>
                         </section>
                     : null
             }

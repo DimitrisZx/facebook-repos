@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Technologies Used
 
-## Available Scripts
+* React
+* JSS
+* Fort-Awesome React Library: 
 
-In the project directory, you can run:
+## Structure
 
-### `npm start`
+For the project's structure I went for single level nesting because I believed the project would not get too complicated and as such not a lot of components would be made.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Inside the "components" folder, at the project's root level, are located all the individual component files with any helper files each component utilizes.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+All my components, except from the "App" component, are functional, stateless components with logic that is limited to how the component will modify and display the data that are passed down from the main, parent component. 
 
-### `npm test`
+## Styling
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For styling I initially considered using SASS and placing a style file in each component's folder. However, remembering the question I asked you during the interview about what CSS framework you are using in the real project, I decided to research and use this **JSS** [library](https://cssinjs.org/jss-plugin-nested?v=v10.0.1).
 
-### `npm run build`
+For the majority of the styling process I felt right at home with JSS, except from the times I wanted to write styles for a list item that was the nth item in its list.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ I tried the following:  
+ ``` javascript
+ parentRule: {
+    //  * more styles 8*
+    "&:last-child": {
+    //  * styles * 
+    },
+ }
+ ```
+but I could not make it work, so I resorted to writing a duplicate style. Howeverm "&:hover": worked just fine.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+I thought of extracting the styles in an external js file but I felt that it would make the structure more complex, without adding any real value. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For the class-based App component I used inline styles because the styles generated from the JSS library I used were based on Hooks and I wanted to focus more on the logic instead of figuring out how to make it work for class components.
 
-### `npm run eject`
+### Spinner / Loader
+The loader I used is custom made from [loading.io](https://loading.io/).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Custom Styling
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+During the initial development process I sticked to the wireframe's choice of colors and general styling.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+However, after finishing the logic part I decided to spice it up a little with a more pleasant main color and more modern styling (I've searched for inspiration on [dribbble](https://dribbble.com/)).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Icons
 
-## Learn More
+For the icons that needed to be shown I used the [fort-awesome](https://github.com/FortAwesome/react-fontawesome) library which utilizes the [font-awesome](https://fontawesome.com/) icons and offers a convenient React component that takes the desired icon's name as a prop.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Logic
 
-### Code Splitting
+The API call is done with the **fetch API** and I decided to filter out all the data that are not displayed in the UI from each object of the response and save their minimized versions in the state.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+For managing the state I used the simple method of just passing the necessary items as props down the component tree. I considered using a library like Redux, but since I am not too familiar with it yet, I thought it would hinder the development more than help it. 
 
-### Analyzing the Bundle Size
+What is more, there was not a lot of data that needed to be passed down.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+__important !__ \
+Github has a limit on the API calls you can perform in a single hour, which is capped at 60 calls. The overcome this problem, I saved a response in an external js file and loaded the data from this file instead.
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+I am pointing this out, so that the people who might be asked to do this exercise in the future will be aware of this problem.

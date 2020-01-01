@@ -5,7 +5,6 @@ import { createUseStyles } from "react-jss";
 
 export default function SortByButton({ sortingFunction }) {
     const classes = useStyles();
-    // const sortingOptions = document.querySelector("#sorting-options");
 
     const expandOptions = e => {
         const sortingOptions = document.querySelector("#sorting-options");

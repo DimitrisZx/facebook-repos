@@ -3,13 +3,10 @@ import ListItem from "../ListItem/ListItem";
 import { createUseStyles } from "react-jss";
 
 export default function List({ reposData, itemsPerPage, toggleItem, expandedItem, pageIndex }) {
-    console.log(expandedItem)
     const classes = useStyles();
-
     const firstRepoIndex = itemsPerPage * pageIndex;
     const lastRepoIndex = firstRepoIndex + itemsPerPage;
     const reposToShow = reposData.slice(firstRepoIndex, lastRepoIndex)
-    console.log(firstRepoIndex,lastRepoIndex    )
     if (reposData === '') {
         reposData = "No matching repos";
     }
@@ -29,7 +26,6 @@ export default function List({ reposData, itemsPerPage, toggleItem, expandedItem
 
 const useStyles = createUseStyles({
     listStyle: {
-        // border: "1px solid #3b5998",
         background: "white",
         boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
         padding: "15px",

@@ -6,7 +6,6 @@ import { createUseStyles } from "react-jss";
 export default function ResultsPerPageBtn({ resultsNumFunction, itemsPerPageNum }) {
     const classes = useStyles();
     
-
     const expandOptions = () => {
         const resultsOptions = document.querySelector("#display-options");
         if (resultsOptions.hasAttribute("style")) {

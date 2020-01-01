@@ -1,13 +1,12 @@
 import React from 'react';
 import { createUseStyles } from "react-jss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faCircle, faCaretDown } from "@fortawesome/free-solid-svg-icons"
+import { faStar, faCaretDown } from "@fortawesome/free-solid-svg-icons"
 import ListItemDesc from "./ListItemDesc"
 
 export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
     const classes = useStyles();
     const { full_name, id, stargazers_count, description } = repoDetails;
-    if (isExpanded) console.log("expanded ", full_name )
     return (
         <li onClick={() => toggleItem(id)} className={classes.listItem}>
             <header className={classes.listItemHeader}>

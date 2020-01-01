@@ -8,7 +8,6 @@ import SortByButton from "../SortByButton/SortByButton";
 import ResultsPerPageBtn from "../ResultsPerPageBtn/ResultsPerPageBtn";
 import { response } from "../../savedResponse";
 
-console.log(response)
 class App extends React.Component {
   constructor() {
     super();
@@ -30,32 +29,35 @@ class App extends React.Component {
   }
 
   async fetchRepositoryData () {
-    
-    // const URL = "https://api.github.com/users/facebook/repos?per_page=100";
-    // const responseJSON = await fetch(URL);
-    // const parsedData = await responseJSON.json();
-    // const requiredData = parsedData.map(
-    //   repo => ({
-    //       id: repo.id, 
-    //       full_name: repo.full_name.split("/")[1], 
-    //       stargazers_count: repo.stargazers_count, 
-    //       description: repo.description
-    //   }))
-    // console.log(requiredData)
-    const requiredData = response.map(
-        repo => ({
-            id: repo.id, 
-            full_name: repo.full_name.split("/")[1], 
-            stargazers_count: repo.stargazers_count, 
-            description: repo.description
-        }));
-        setTimeout(() =>
-          this.setState({ 
-            reposData: requiredData,
-            fetchingData: false,
-          })
-        , 2000
-        )
+    const URL = "https://api.github.com/users/facebook/repos?per_page=100";
+    const responseJSON = await fetch(URL);
+    const parsedData = await responseJSON.json();
+    const requiredData = parsedData.map(
+      repo => ({
+          id: repo.id, 
+          full_name: repo.full_name.split("/")[1], 
+          stargazers_count: repo.stargazers_count, 
+          description: repo.description
+      }))
+      this.setState({ 
+        reposData: requiredData,
+        fetchingData: false,
+      })
+    // use this snippet if github refuses the request due to limit reached
+    // const requiredData = response.map(
+    //     repo => ({
+    //         id: repo.id, 
+    //         full_name: repo.full_name.split("/")[1], 
+    //         stargazers_count: repo.stargazers_count, 
+    //         description: repo.description
+    //     }));
+    //     setTimeout(() =>
+    //       this.setState({ 
+    //         reposData: requiredData,
+    //         fetchingData: false,
+    //       })
+    //     , 2000
+    //     )
   }
   
   setNumOfResults(numOfResults) {
@@ -63,7 +65,6 @@ class App extends React.Component {
   }
 
   toggleItem(itemToExpand){
-    console.log(itemToExpand)
 
     if (itemToExpand === this.state.expandedItem) {
       this.setState({ expandedItem: undefined })
@@ -74,7 +75,6 @@ class App extends React.Component {
 
   sortResults(fieldToSortBy) {
     const { reposData: results } = this.state;
-    console.log(results.forEach(result => console.log(result[fieldToSortBy])))
     if (fieldToSortBy === "full_name") {
       const sortedResults = results.sort((a,b) => a[fieldToSortBy].toLowerCase() < b[fieldToSortBy].toLowerCase() ? -1 : 1 );
       const sortedSearchResults = results.sort((a,b) => a[fieldToSortBy].toLowerCase() < b[fieldToSortBy].toLowerCase() ? -1 : 1 );

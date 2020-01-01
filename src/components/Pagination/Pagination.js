@@ -5,7 +5,6 @@ import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons
 
 export default function Pagination({ currentPage, numOfPages, goToPage }) {
     const classes = useStyles();
-    console.log(numOfPages)
 
     const handleClick = (pageIndex, numOfPages=undefined) => {
         if ((numOfPages !== undefined && pageIndex > numOfPages) || pageIndex < 0) {
@@ -39,8 +38,6 @@ export default function Pagination({ currentPage, numOfPages, goToPage }) {
             fillPages(numOfPages);
         }
         fillPages(numOfPages);
-        console.log(pages);
-
         const generatePageButtons = numOfPage => {
             return pageBtnTemplate(numOfPage);
         }

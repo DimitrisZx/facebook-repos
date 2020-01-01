@@ -7,7 +7,6 @@ export default function SearchBar({ searchFunction }) {
     
     const handleChange = e => {
         const searchTerm = e.target.value;
-        console.log(searchTerm);
         searchFunction(searchTerm);
     }
     const classes = useStyles();
@@ -45,6 +44,3 @@ const useStyles = createUseStyles({
         width: "100%"
     }
 })
-
-
-// #713bdb purple

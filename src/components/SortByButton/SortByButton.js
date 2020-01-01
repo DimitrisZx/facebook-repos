@@ -48,7 +48,6 @@ const useStyles = createUseStyles({
         border: "none",
         boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
         fontSize: ".8rem",
-        borderRadius: "3px"
     },
     displayBtn: {
         position: "relative",

@@ -6,7 +6,6 @@ import SearchBar from "../SearchBar/SearchBar";
 import Pagination from "../Pagination/Pagination";
 import SortByButton from "../SortByButton/SortByButton";
 import ResultsPerPageBtn from "../ResultsPerPageBtn/ResultsPerPageBtn";
-import { response } from "../../savedResponse";
 
 class App extends React.Component {
   constructor() {

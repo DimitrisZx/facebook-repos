@@ -10,7 +10,7 @@ export default function Loader() {
             <section className={ classes.containerStyles }>
                 <section className={classes.title}><div className={classes.F}>F</div> Repository</section>
                 <div className={classes.spinnerContainer}>
-                    <img src={spinner} />
+                    <img src={spinner} alt="loading spinner"/>
                     <span className={classes.loading}>loading</span>
                 </div>
             </section>

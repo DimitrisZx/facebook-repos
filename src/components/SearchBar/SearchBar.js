@@ -24,19 +24,27 @@ export default function SearchBar({ searchFunction }) {
 const useStyles = createUseStyles({
     searchBar: {
         borderRadius: "30px",
-        border: "2px solid #8598c0",
+        border: "2px solid #fff",
         padding: "10px 25px",
-
+        background: "#fff",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         width: "75%",
-        marginBottom: "25px",
-
+        marginBottom: "15px",
+        boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
+        transition: "all .2s ease-in",
+        "&:hover" : {
+            borderColor: "#713bdb",
+        }
     },
     input: {
         border: "none",
         fontSize: "1.42rem",
-        outline: "none"
+        outline: "none",
+        width: "100%"
     }
 })
+
+
+// #713bdb purple

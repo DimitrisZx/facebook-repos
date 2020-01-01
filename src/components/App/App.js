@@ -49,14 +49,17 @@ class App extends React.Component {
             stargazers_count: repo.stargazers_count, 
             description: repo.description
         }));
-    this.setState({ 
-      reposData: requiredData,
-      fetchingData: false,
-    });
+        setTimeout(() =>
+          this.setState({ 
+            reposData: requiredData,
+            fetchingData: false,
+          })
+        , 2000
+        )
   }
   
   setNumOfResults(numOfResults) {
-    this.setState({itemsPerPage: parseInt(numOfResults)});
+    this.setState({itemsPerPage: parseInt(numOfResults), currentPageIndex: 0});
   }
 
   toggleItem(itemToExpand){
@@ -111,9 +114,8 @@ class App extends React.Component {
   
   render() {
     const { fetchingData, reposData, itemsPerPage, expandedItem, searchedResults, currentPageIndex } = this.state;
-    return (
+    return ( fetchingData ? <Loader /> : 
       <div className="App" style={appStyles}>
-        { fetchingData ? <Loader /> : null }
         <section style={contentsStyles} id="contents">
           <SearchBar searchFunction={this.searchResults}/>
           <section style={topNavStyles}>
@@ -136,8 +138,8 @@ class App extends React.Component {
             goToPage={this.goToPage}
           />
         </section>
-      </div>
-    );
+      </div>)
+    ;
   }
 }
 
@@ -145,9 +147,8 @@ const titleStyles = {
   padding: '0',
   margin: "5px",
   fontSize: "1.6rem",
-  color: "#3b5998"
+  color: "#713bdb"
 }
-
 
 const displayOptionsStyles = {
   display: "flex",
@@ -171,7 +172,7 @@ const appStyles = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  background: "#fff"
+  background: "#f9f9f9"
 }
 
 export default App;

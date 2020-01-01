@@ -5,10 +5,11 @@ import { createUseStyles } from "react-jss";
 
 export default function SortByButton({ sortingFunction }) {
     const classes = useStyles();
-    const sortingOptions = document.querySelector("#sorting-options");
+    // const sortingOptions = document.querySelector("#sorting-options");
 
     const expandOptions = e => {
-        if (sortingOptions.hasAttribute("style")) {
+        const sortingOptions = document.querySelector("#sorting-options");
+        if (sortingOptions.style.display !== "flex") {
             document.querySelector("#sorting-options").style.display = "flex"
         } else {
             sortingOptions.style.display = "flex"
@@ -20,6 +21,7 @@ export default function SortByButton({ sortingFunction }) {
     };
 
     const handleClick = (sortingFunction, fieldToSort) => {
+        const sortingOptions = document.querySelector("#sorting-options");
         sortingOptions.removeAttribute("style");
         sortingFunction(fieldToSort)
     }
@@ -44,7 +46,8 @@ const useStyles = createUseStyles({
         display: "flex",
         justifyContent: "space-between",
         borderRadius: "3px",
-        border: "1px solid #6a81b1",
+        border: "none",
+        boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
         fontSize: ".8rem",
         borderRadius: "3px"
     },
@@ -66,10 +69,11 @@ const useStyles = createUseStyles({
     },
     sortingOption : {
         background: "#fff",
-        marginTop: "2px",
-        border: "1px solid #3b5998",
-        padding: "10px",
+        marginTop: "1px",
+        border: "1px solid #713bdb",
+        borderRadius: "3px",
+        padding: "5px 7px",
         textAlign: "left",
-        color: "#3b5998"
+        color: "#713bdb"
     }
 });

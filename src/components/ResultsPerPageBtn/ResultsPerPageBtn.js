@@ -5,9 +5,10 @@ import { createUseStyles } from "react-jss";
 
 export default function ResultsPerPageBtn({ resultsNumFunction, itemsPerPageNum }) {
     const classes = useStyles();
-    const resultsOptions = document.querySelector("#display-options");
+    
 
     const expandOptions = () => {
+        const resultsOptions = document.querySelector("#display-options");
         if (resultsOptions.hasAttribute("style")) {
             document.querySelector("#display-options").style.display = "flex";
         } else {
@@ -20,13 +21,14 @@ export default function ResultsPerPageBtn({ resultsNumFunction, itemsPerPageNum 
     };
 
     const handleClick = (resultsNumFunction, resultsNum) => {
+        const resultsOptions = document.querySelector("#display-options");
         resultsOptions.removeAttribute("style");
         resultsNumFunction(resultsNum);
     }
 
     return (
         <div id="results-btn" className={classes.displayBtn}>
-            <span style={{color: "#3b5998"}}>results per page</span>
+            <span style={{color: "#713bdb"}}>results per page</span>
             <button className={classes.button} onClick={ expandOptions }><span>{itemsPerPageNum}</span><FontAwesomeIcon icon={faCaretDown}/></button>
             <section id="display-options" className={classes.resultsOptions}>
                 <ul>
@@ -41,7 +43,8 @@ export default function ResultsPerPageBtn({ resultsNumFunction, itemsPerPageNum 
 const useStyles = createUseStyles({
     button: {
         background: "#fff",
-        border: "1px solid #6a81b1",
+        border: "none",
+        boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
         fontSize: ".8rem",
         borderRadius: "3px",
         marginLeft: "10px",
@@ -71,10 +74,11 @@ const useStyles = createUseStyles({
     resultsOption : {
         background: "#fff",
         marginTop: "2px",
-        border: "1px solid #3b5998",
-        padding: "10px",
+        border: "1px solid #713bdb",
+        padding: "5px 15px",
+        borderRadius: "3px",
         textAlign: "left",
-        color: "#3b5998",
+        color: "#713bdb",
         width: "100%",
     }
 });

@@ -29,10 +29,11 @@ export default function List({ reposData, itemsPerPage, toggleItem, expandedItem
 
 const useStyles = createUseStyles({
     listStyle: {
-        border: "1px solid #3b5998",
+        // border: "1px solid #3b5998",
         background: "white",
+        boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
         padding: "15px",
-        borderRadius: "3px",
+        borderRadius: "15px",
         margin: "15px 0px",
         height: "510px",
         overflow: "auto"

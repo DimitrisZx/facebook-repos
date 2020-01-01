@@ -13,11 +13,8 @@ export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
             <header className={classes.listItemHeader}>
                 <h3 className={classes.repoName}>{full_name}</h3>
                 <div className={classes.repoStars}>
-                    <span className="fa-layers fa-fw">
-                        <FontAwesomeIcon className={classes.circleIcon} icon={faCircle} />
-                        <FontAwesomeIcon className={classes.starIcon} icon={faStar} />
-                    </span>
-                    {stargazers_count}
+                    <FontAwesomeIcon className={classes.starIcon} icon={faStar} />
+                    <span className={classes.starsCount}>{stargazers_count}</span>
                 </div>
             <FontAwesomeIcon className={ classes.caretIcon } icon={ faCaretDown } />
             </header> 
@@ -35,24 +32,34 @@ export default function ListItem({ isExpanded, toggleItem, repoDetails }) {
 }
 
 const useStyles = createUseStyles({
-
-
+    starsCount: {
+        color: "#713bdb",
+        fontWeight: "bold"
+    },
     listItemDesc: {
-        padding: "5px"
+        padding: "15px 25px",
+        borderRadius: "16px",
+        "& h4": {
+            margin: "0px",
+            color: "#713bdb"
+        }
     },
     listItemHeader: {
         display: "flex",
-        background: "#e8ebf3",
+        background: "#713bdb",
         padding: "15px 20px",
+        borderRadius: "16px"
     },
     caretIcon: {
-        ":last-child": {},
+        color: "white",
         flex:1,
     },
     starIcon: {
-        color: "#fff"
+        color: "#713bdb",
+        margin: "0px 15px"
     },
     repoName: {
+        color: "white",
         fontSize: "1rem",
         margin: 0,
         padding: 0,
@@ -70,12 +77,12 @@ const useStyles = createUseStyles({
     },
     listItem: {
         display: "flex",
-        color: "#3b5998",
+        color: "darkgrey",
         flexDirection: "column",
         background: "none",
         border: "1px solid #ced5e5",
         marginBottom: '5px',
-        borderRadius: "3px",
+        borderRadius: "16px",
         cursor: "pointer",
         "& .listItem:last-child": {
             marginBottom: 10,

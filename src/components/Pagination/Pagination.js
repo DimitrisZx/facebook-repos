@@ -73,7 +73,7 @@ const useStyles = createUseStyles({
         fontSize: "1.4rem"
     },
     pageBtnStyles: {
-        color: "#f0f0f0",
+        color: "#b1b1b1",
         width: "20px",
         height: "20px",
         border: "1px solid #f0f0f0",
@@ -84,10 +84,16 @@ const useStyles = createUseStyles({
         background: "#fff",
         padding: "15px",
         cursor: "pointer",
-        marginRight: "5px"
+        marginRight: "5px",
+        borderRadius: "16px",
+        boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
+        transition: "all .1s ease-in",
+        "&:hover": {
+            borderColor: "#713bdb"
+        }
     },
     arrowButton : {
-        color: "#737373",
+        color: "#713bdb",
         borderColor: "#e5e7ec",
         width: "20px",
         height: "20px",
@@ -98,21 +104,30 @@ const useStyles = createUseStyles({
         alignItems: "center",
         padding: "15px",
         cursor: "pointer",
-        marginRight: "5px"
+        marginRight: "5px",
+        borderRadius: "16px",
+        boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
+        transition: "all .1s ease-in",
+        "&:hover": {
+            color: "#fff",
+            background: "#713bdb"
+        }
     },  
     currentPageBtn: {
         color: "#fff",
         width: "20px",
         height: "20px",
-        border: "1px solid #f0f0f0",
+        border: "1px solid #713bdb",
         listStyle: 'none',
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#3b5998",
+        background: "#713bdb",
         padding: "15px",
         cursor: "pointer",
-        marginRight: "5px"
+        marginRight: "5px",
+        borderRadius: "16px",
+        boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)"
     },
     paginationStyles: {
         display: "flex",

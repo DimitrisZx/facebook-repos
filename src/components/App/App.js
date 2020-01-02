@@ -160,7 +160,7 @@ const titleContainerStyles = {
   flexDirection: "row",
   alignSelf: "flex-start",
   marginLeft: "50px",
-  marginTop: "-150px",
+  marginTop: "-100px",
   alignItems: "center",
   justifyContent: "center"
 }

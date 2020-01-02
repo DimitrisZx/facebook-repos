@@ -115,6 +115,14 @@ class App extends React.Component {
     const { fetchingData, reposData, itemsPerPage, expandedItem, searchedResults, currentPageIndex } = this.state;
     return ( fetchingData ? <Loader /> : 
       <div className="App" style={appStyles}>
+        <div style={titleContainerStyles}>
+          <section style={topTitleStyles}>
+            <div style={Fstyles}>
+              F
+            </div> 
+            Repository
+          </section>  
+        </div>
         <section style={contentsStyles} id="contents">
           <SearchBar searchFunction={this.searchResults}/>
           <section style={topNavStyles}>
@@ -140,6 +148,36 @@ class App extends React.Component {
       </div>)
     ;
   }
+}
+
+const topTitleStyles = {
+  fontSize: "2rem",
+  display: "flex",
+  color: "#989898",
+}
+const titleContainerStyles = {
+  display: "flex",
+  flexDirection: "row",
+  alignSelf: "flex-start",
+  marginLeft: "50px",
+  marginTop: "-150px",
+  alignItems: "center",
+  justifyContent: "center"
+}
+
+const Fstyles = {
+  fontSize: "2rem",
+  marginRight: "10px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "#713bdb",
+  boxShadow: "3px 3px 9px -1px  rgba(0,0,0,0.19)",
+  borderRadius: "100%",
+  color: "white",
+  textAlign: "center",
+  width: "50px",
+  height: "50px"
 }
 
 const titleStyles = {

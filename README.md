@@ -21,7 +21,7 @@ For the majority of the styling process I felt right at home with JSS, except fr
  I tried the following:  
  ``` javascript
  parentRule: {
-    //  * more styles 8*
+    //  * more styles *
     "&:last-child": {
     //  * styles * 
     },
